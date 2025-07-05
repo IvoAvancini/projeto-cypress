@@ -1,1 +1,0 @@
-# My cypress automation
