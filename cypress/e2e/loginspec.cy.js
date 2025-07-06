@@ -11,7 +11,7 @@ describe('Orange ERM test', () => {
   }
    
   it('Login successful', () => {
-    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.visit('/auth/login')
     cy.get(selectorslist.usernameField).type (userData.userSuccess.username)
     cy.get(selectorslist.passwordField).type (userData.userSuccess.password)
     cy.get(selectorslist.loginButton).click()
@@ -20,7 +20,7 @@ describe('Orange ERM test', () => {
     
 })
 it('Login fail', () => {
-    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.visit('/auth/login')
     cy.get(selectorslist.usernameField).type (userData.userFail.username)
     cy.get(selectorslist.passwordField).type (userData.userFail.password)
     cy.get(selectorslist.loginButton).click()
