@@ -6,17 +6,38 @@ describe('Orange ERM test', () => {
     passwordField: "[name='password']",
     loginButton: "[type='submit']",
     selectionTitleTopBar: '.oxd-topbar-header-title',
-    wrongCredentialAlert: "[role='alert']"
+    wrongCredentialAlert: "[role='alert']",
+    myInfoButton: '[href="/web/index.php/pim/viewMyDetails"]',
+    firsNameField: "[name='firstName']",
+    midNameField: "[name='middleName']",
+    lastNameField: "[name='lastName']",
+    genericField: ".oxd-input--active",
+    dateField: "[placeholder='yyyy-dd-mm']",
+    dateCloseButton: ".--close",
+
 
   }
    
-  it('Login successful', () => {
+  it.only('User Info Update- Success', () => {
+
+
     cy.visit('/auth/login')
     cy.get(selectorslist.usernameField).type (userData.userSuccess.username)
     cy.get(selectorslist.passwordField).type (userData.userSuccess.password)
     cy.get(selectorslist.loginButton).click()
     cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
     cy.get(selectorslist.selectionTitleTopBar).contains('Dashboard')
+    cy.get(selectorslist.myInfoButton).click()
+    cy.get(selectorslist.firsNameField).clear ().type('Maria Flor')
+    cy.get(selectorslist.midNameField).clear().type('Vieira')
+    cy.get(selectorslist.lastNameField).clear().type('Avancini')
+    cy.get(selectorslist.genericField).eq (3).clear().type('Neneco')
+    cy.get(selectorslist.genericField).eq (4).clear().type('1 aninho')
+    cy.get(selectorslist.genericField).eq (5).clear().type('pilisca')
+    cy.get(selectorslist.genericField).eq (6).clear().type('2024-12-05')
+    cy.get(selectorslist.dateCloseButton).click()
+
+    
     
 })
 it('Login fail', () => {
