@@ -14,6 +14,7 @@ describe('Orange ERM test', () => {
     genericField: ".oxd-input--active",
     dateField: "[placeholder='yyyy-dd-mm']",
     dateCloseButton: ".--close",
+    savebutton: "[type='submit']"
 
 
   }
@@ -34,8 +35,9 @@ describe('Orange ERM test', () => {
     cy.get(selectorslist.genericField).eq (3).clear().type('Neneco')
     cy.get(selectorslist.genericField).eq (4).clear().type('1 aninho')
     cy.get(selectorslist.genericField).eq (5).clear().type('pilisca')
-    cy.get(selectorslist.genericField).eq (6).clear().type('2024-12-05')
+    cy.get(selectorslist.genericField).eq (7).clear().type('2024-12-05')
     cy.get(selectorslist.dateCloseButton).click()
+    cy.get(selectorslist.savebutton).eq(0).click()
 
     
     
