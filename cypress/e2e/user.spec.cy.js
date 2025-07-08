@@ -12,9 +12,11 @@ describe('Orange ERM test', () => {
     midNameField: "[name='middleName']",
     lastNameField: "[name='lastName']",
     genericField: ".oxd-input--active",
-    dateField: "[placeholder='yyyy-dd-mm']",
     dateCloseButton: ".--close",
-    savebutton: "[type='submit']"
+    nationalityField:'.oxd-select-wrapper',
+    selectorField: ".oxd-select-dropdown",
+    savebutton: "[type='submit']",
+    
 
 
   }
@@ -35,9 +37,16 @@ describe('Orange ERM test', () => {
     cy.get(selectorslist.genericField).eq (3).clear().type('Neneco')
     cy.get(selectorslist.genericField).eq (4).clear().type('1 aninho')
     cy.get(selectorslist.genericField).eq (5).clear().type('pilisca')
-    cy.get(selectorslist.genericField).eq (7).clear().type('2024-12-05')
+    cy.get(selectorslist.genericField).eq (6).clear().type('2024-12-05')
     cy.get(selectorslist.dateCloseButton).click()
+    cy.get(selectorslist.nationalityField).eq(0).click()
+    cy.get(selectorslist.selectorField) .should('be.visible')
+    cy.get(selectorslist.selectorField).contains('Brazilian').click()
+    cy.get(selectorslist.nationalityField).eq(1).click()
+    cy.get(selectorslist.selectorField).should('be.visible')
+    cy.get(selectorslist.selectorField).contains('Other').click()
     cy.get(selectorslist.savebutton).eq(0).click()
+    
 
     
     
