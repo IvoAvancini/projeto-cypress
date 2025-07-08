@@ -1,13 +1,16 @@
 import userData from '../fixtures/user-data.json'
+import LoginPage from '../pages/loginPage.js'
+import DashboardPage  from '../pages/dashboardPage.js'
+import MenuPage from '../pages/menuPage.js'
+
+
+const loginPage = new LoginPage()
+const dashboardPage = new DashboardPage()
+const menuPage = new MenuPage()
 
 describe('Orange ERM test', () => {
   const selectorslist  = {
-    usernameField: "[name='username']",
-    passwordField: "[name='password']",
-    loginButton: "[type='submit']",
-    selectionTitleTopBar: '.oxd-topbar-header-title',
-    wrongCredentialAlert: "[role='alert']",
-    myInfoButton: '[href="/web/index.php/pim/viewMyDetails"]',
+    
     firsNameField: "[name='firstName']",
     midNameField: "[name='middleName']",
     lastNameField: "[name='lastName']",
@@ -17,20 +20,14 @@ describe('Orange ERM test', () => {
     selectorField: ".oxd-select-dropdown",
     savebutton: "[type='submit']",
     
-
-
-  }
+ }
    
   it.only('User Info Update- Success', () => {
 
-
-    cy.visit('/auth/login')
-    cy.get(selectorslist.usernameField).type (userData.userSuccess.username)
-    cy.get(selectorslist.passwordField).type (userData.userSuccess.password)
-    cy.get(selectorslist.loginButton).click()
-    cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
-    cy.get(selectorslist.selectionTitleTopBar).contains('Dashboard')
-    cy.get(selectorslist.myInfoButton).click()
+    loginPage.acessLoginPage()
+    loginPage.loginWithUser(userData.userSuccess.username, userData.userSuccess.password )
+    dashboardPage.checkDashboardPage()
+    menuPage.accessMyInfo()
     cy.get(selectorslist.firsNameField).clear ().type('Maria Flor')
     cy.get(selectorslist.midNameField).clear().type('Vieira')
     cy.get(selectorslist.lastNameField).clear().type('Avancini')
@@ -44,7 +41,7 @@ describe('Orange ERM test', () => {
     cy.get(selectorslist.selectorField).contains('Brazilian').click()
     cy.get(selectorslist.nationalityField).eq(1).click()
     cy.get(selectorslist.selectorField).should('be.visible')
-    cy.get(selectorslist.selectorField).contains('Other').click()
+    cy.get(selectorslist.selectorField).contains('Single').click()
     cy.get(selectorslist.savebutton).eq(0).click()
     
 
