@@ -22,5 +22,8 @@ selectorslist() {
     cy.get(this.selectorslist().passwordField).type(password)
     cy.get(this.selectorslist().loginButton).click()
    }
+   checkAcessInvalid(){
+     cy.get(this.selectorslist().wrongCredentialAlert)
+   }
 }
 export default LoginPage
